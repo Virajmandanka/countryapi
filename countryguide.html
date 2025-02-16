@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .men{
+        height: auto;
+        width:500px ;
+        padding: px;
+        /* border: 1px solid black; */
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;   
+        margin-top: 40px;
+        margin-left: 350px;
+     }
+        
+    input{
+
+        height: 30px;
+        width: 220px;
+        border-radius: 20px;
+        margin-left: 80px;
+        margin-top: 20px;
+        /* border: none; */
+        border: 2px solid rgb(203, 202, 202);
+       
+        
+    }
+    button{
+        height: 30px;
+        width: 100px;
+        /* border: 1px solid black; */
+        border: none;
+        border-radius: 10px;
+        color: white;
+        background-color: rgb(8, 57, 252);
+        
+    }
+    button:hover{
+        box-shadow: 5px 5px 5px  black ;    }
+    .box{
+        height: 160px;
+        width: 450px;
+        /* border: 1px solid black; */
+        margin-left: 24px;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;    
+        border-radius: 5px;
+
+        
+        
+        
+    
+    }
+    .box1{
+        height: 145px;
+        width: 200px;
+        /* border: 1px solid black; */
+    
+    }
+    .box1 img{
+       
+        height: 100px;
+        width: 100%;
+        margin-top: 10px;
+       border-radius: 5px;
+    }
+    .box2{
+        height: 30px;
+        width: 200px;
+        /* border: 1px solid black; */
+        margin-top: 10px;
+    }
+    #name{
+        margin-top: 6px;
+        text-align: center;
+        color: #222;
+      
+    }
+    #jj{
+        margin-top: 6px;
+        text-align: center;
+        color: #222;
+      
+    }
+    #hh{
+         text-align: start;
+         margin-left: 21px;
+         text-shadow: 2px 2px 3px rgb(227, 165, 175);
+    }
+    #p{
+        margin-left: 21px;
+        text-shadow: 2px 2px 3px rgb(227, 165, 175);
+
+    }
+    #popu{
+        margin-left: 21px;
+        text-shadow: 2px 2px 3px rgb(227, 165, 175);
+
+    }
+    #cur{
+        margin-left: 21px;
+        text-shadow: 2px 2px 3px rgb(227, 165, 175);
+
+    }
+    #lug{
+        margin-left: 21px;
+        text-shadow: 1px 1px 2px rgb(227, 165, 175);
+
+    }
+    @media(max-width:480px)
+    {
+
+        .men{
+           margin-left: 0px;
+        }
+
+    }
+    @media(max-width:720px)
+    {
+        .men{
+           margin-left: 0px;
+        }
+
+    }
+    @media(max-width:980px)
+    {
+        .men{
+           margin-left: 0px;
+        }
+    }
+</style>
+<body>
+   <div class="men">
+
+   
+    <input type="  text" placeholder="  Enter you country name here..." id="con">
+
+    <button type="button" onclick="find()">submit</button>
+
+    <div class="box">
+
+       <div class="box1">
+
+        <img src="" alt="" id="im">
+        <div class="box2"> 
+            <h4 id="name"></h4>
+        </div> 
+
+       </div> 
+       <div class="box1">
+        <img src="" alt="" id="iimm">
+        <div class="box2">
+            <h4 id="jj"></h4>
+        </div>
+
+       </div> 
+
+    </div>
+   
+    <h1 id="hh"></h1>
+    <h1 id="p"></h1>
+    <h1 id="popu"></h1>
+    <h3 id="cur"></h3>
+    <h5 id="lug"></h5>
+   
+    
+
+</div>
+    
+    
+</body>
+<script>
+    var find=()=>
+    {
+  
+        var a=document.getElementById("con").value;
+
+        var url=`https://restcountries.com/v3.1/name/${a}?fullText=true`
+
+        // console.log(url);
+
+        fetch(url)
+
+        .then(Response=>Response.json())
+        .then(data=>{
+            
+                document.getElementById("name").innerHTML=(data[0].name.common)
+                document.getElementById("hh").innerHTML="Capital:-"+(data[0].capital);
+                document.getElementById("p").innerHTML="Continents:-"+(data[0].continents[0])
+
+
+                document.getElementById("popu").innerHTML="Population:-"+(data[0].population)
+                // document.getElementById("cur").innerHTML=(Object.keys(data[0].currencies)[0])
+                document.getElementById("lug").innerHTML="Languages:-"+(Object.values(data[0].languages).toString().split(",").join(","));
+                document.getElementById("cur").innerHTML="Currency:-"+(data[0].currencies[Object.keys(data[0].currencies)].name)
+
+
+
+        
+            document.getElementById("im").src=(data[0].flags.png)
+            document.getElementById("iimm").src=(data[0].coatOfArms.svg);
+            
+            document.getElementById("jj").innerHTML="coatOfArms";
+            
+            
+
+
+            // console.log(data[0])
+        })
+
+    }
+
+</script>
+</html>
